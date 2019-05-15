@@ -1,0 +1,24 @@
+{
+	"users": [
+		{
+			"userId": "USR1001",
+			"userType": "Customer",
+			"activeDuration": 60
+		},
+		{
+			"userId": "USR1002",
+			"userType": "Employee",
+			"activeDuration": 30
+		},
+		{
+			"userId": "USR1003",
+			"userType": "Affiliate",
+			"activeDuration": 30
+		},
+		{
+			"userId": "USR1004",
+			"userType": "Customer",
+			"activeDuration": 10
+		}
+	]
+}

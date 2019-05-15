@@ -1,0 +1,26 @@
+
+exclude:
+  enabled: true
+  productTypes: 
+    - Grocery
+    
+employee: 
+  enabled: true
+  discountPercentage: 30
+  
+affiliate: 
+  enabled: true
+  discountPercentage: 10
+  
+customer:
+  enabled: true
+  categories:
+    - activeDuration: P2Y
+      discountPercentage: 5
+      enabled: true
+  
+  
+
+  
+
+

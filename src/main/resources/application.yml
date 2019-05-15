@@ -1,0 +1,20 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: discount-service  
+  profiles:    active:    - dev
+  cloud:    config:      discovery:        service-id: CONFIG-SERVER
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetch-registry: true
+    service-url:      
+      defaultZone: http://localhost:9003/eureka 
+    
+
+  
+
+
