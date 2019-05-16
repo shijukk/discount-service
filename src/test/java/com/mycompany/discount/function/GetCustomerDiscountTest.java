@@ -26,7 +26,7 @@ public class GetCustomerDiscountTest {
 				.build();
 		getAffiliateDiscount = new GetCustomerDiscount(discount);
 
-		double result = getAffiliateDiscount.applyAsDouble(UserInfoDTO.builder().activeDuration(21).build());
+		double result = getAffiliateDiscount.applyAsDouble(UserInfoDTO.builder().activeDurationDays(21).build());
 
 		assertEquals(10.0, result);
 
@@ -41,7 +41,7 @@ public class GetCustomerDiscountTest {
 				.build();
 		getAffiliateDiscount = new GetCustomerDiscount(discount);
 
-		double result = getAffiliateDiscount.applyAsDouble(UserInfoDTO.builder().activeDuration(19).build());
+		double result = getAffiliateDiscount.applyAsDouble(UserInfoDTO.builder().activeDurationDays(19).build());
 
 		assertEquals(0.0, result);
 	}
@@ -55,7 +55,7 @@ public class GetCustomerDiscountTest {
 				.build();
 		getAffiliateDiscount = new GetCustomerDiscount(discount);
 
-		double result = getAffiliateDiscount.applyAsDouble(UserInfoDTO.builder().activeDuration(20).build());
+		double result = getAffiliateDiscount.applyAsDouble(UserInfoDTO.builder().activeDurationDays(20).build());
 
 		assertEquals(10.0, result);
 	}

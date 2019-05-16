@@ -3,22 +3,22 @@
 		{
 			"userId": "USR1001",
 			"userType": "Customer",
-			"activeDuration": 60
+			"activeDurationDays": 800
 		},
 		{
 			"userId": "USR1002",
 			"userType": "Employee",
-			"activeDuration": 30
+			"activeDurationDays": 30
 		},
 		{
 			"userId": "USR1003",
 			"userType": "Affiliate",
-			"activeDuration": 30
+			"activeDurationDays": 30
 		},
 		{
 			"userId": "USR1004",
 			"userType": "Customer",
-			"activeDuration": 10
+			"activeDurationDays": 10
 		}
 	]
 }

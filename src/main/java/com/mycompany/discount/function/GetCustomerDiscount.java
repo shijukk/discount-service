@@ -19,7 +19,7 @@ public class GetCustomerDiscount implements ToDoubleFunction<UserInfoDTO> {
 	@Override
 	public double applyAsDouble(final UserInfoDTO user) {
 		log.info("customerDiscount configured : {}", customerDiscount.toString());
-		final Duration activeDuration = Duration.ofDays(0).plusDays(user.getActiveDuration());
+		final Duration activeDuration = Duration.ofDays(0).plusDays(user.getActiveDurationDays());
 		if (customerDiscount.isEnabled()) {
 			return customerDiscount.getCustomerCategories().stream()
 					.filter(category -> activeDuration.compareTo(category.getActiveDuration()) >= 0).findFirst()

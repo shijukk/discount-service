@@ -101,7 +101,7 @@ public class DiscountServiceTest {
 		InvoiceLevelDiscount invoiceLevelDiscount = InvoiceLevelDiscount.builder().discountApplyForEach(100.0)
 				.flatDiscount(5.0).build();
 		lenient().when(userInfoDAOImpl.getUserInfo(eq("Customer1")))
-				.thenReturn(UserInfoDTO.builder().userId("Customer1").userType("Customer").activeDuration(60).build());
+				.thenReturn(UserInfoDTO.builder().userId("Customer1").userType("Customer").activeDurationDays(60).build());
 		lenient().when(userInfoDAOImpl.getUserInfo(eq("Employee1")))
 				.thenReturn(UserInfoDTO.builder().userId("Employee1").userType("Employee").build());
 		lenient().when(userInfoDAOImpl.getUserInfo(eq("Affiliate1")))

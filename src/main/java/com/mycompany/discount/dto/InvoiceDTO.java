@@ -67,7 +67,7 @@ public class InvoiceDTO {
 	 * 
 	 */
 	@NotNull
-	@ApiModelProperty( required = true)
+	@ApiModelProperty( required = true, notes="3 letter currency code")
 	private String currencyCode;
 
 }
