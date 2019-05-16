@@ -6,6 +6,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,6 +26,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ApiModel
 public class InvoiceDTO {
 
 	/**
@@ -32,6 +35,7 @@ public class InvoiceDTO {
 	@NotNull
 	@NotEmpty
 	@Valid
+	@ApiModelProperty( required = true)
 	private List<ProductDTO> products;
 
 	/**
@@ -63,6 +67,7 @@ public class InvoiceDTO {
 	 * 
 	 */
 	@NotNull
+	@ApiModelProperty( required = true)
 	private String currencyCode;
 
 }

@@ -2,8 +2,8 @@ package com.mycompany.discount.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
-import lombok.NoArgsConstructor;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
@@ -15,9 +15,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @author kkshi
  *
  */
+@Profile("dev")
 @Configuration
 @EnableSwagger2
-@NoArgsConstructor
 public class SwaggerConfig {
 	
 	/**
@@ -29,7 +29,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
             .select()
             .apis(RequestHandlerSelectors.any())
-            .paths(PathSelectors.ant("/DiscountService/**"))
+            .paths(PathSelectors.regex("/applyDiscount.*"))
 				.build();
 	}
 }

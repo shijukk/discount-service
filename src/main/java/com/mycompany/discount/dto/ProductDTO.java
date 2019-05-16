@@ -3,6 +3,8 @@ package com.mycompany.discount.dto;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,6 +23,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 @ToString
+@ApiModel
 public class ProductDTO {
 	
 	/**
@@ -31,12 +34,14 @@ public class ProductDTO {
 	 * 
 	 */
 	@NotNull @NotBlank
+	@ApiModelProperty( required = true)
 	private String productType;
 	
 	/**
 	 * 
 	 */
 	@NotNull 
+	@ApiModelProperty( required = true)
 	private Double price;
 	
 	/**
