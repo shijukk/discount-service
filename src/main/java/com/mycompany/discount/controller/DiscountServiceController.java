@@ -22,23 +22,21 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @Slf4j
 public class DiscountServiceController {
-	
+
 	@Autowired
 	private DiscountService service;
-	
-	
+
 	/**
 	 * 
 	 * @param invoice
 	 * @return
 	 */
-	@PostMapping (path="/applyDiscount", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
+	@PostMapping(path = "/applyDiscount", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public InvoiceDTO applyDicount(@Valid @RequestBody final InvoiceDTO invoice,
-			@RequestHeader(name="userId") final String userId) {
+			@RequestHeader(name = "userId") final String userId) {
 		log.info("applyDicount service called.");
 		log.info(invoice.toString());
 		return service.applyDiscount(invoice, userId);
 	}
 
-	
 }

@@ -46,7 +46,7 @@ public class DiscountServiceControllerTest {
 	@Test
 	public void testControllerWithoutMandatoryElements() throws RestClientException, MalformedURLException {
 
-		List<ProductDTO> products = new ArrayList();
+		List<ProductDTO> products = new ArrayList<>();
 		products.add(ProductDTO.builder().price(100.0).build());
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("userId", "testValue");
@@ -62,10 +62,10 @@ public class DiscountServiceControllerTest {
 	@Test
 	public void testControllerWithValidRequest() throws RestClientException, MalformedURLException {
 
-		List<ProductDTO> products = new ArrayList();
+		List<ProductDTO> products = new ArrayList<>();
 		products.add(ProductDTO.builder().price(100.0).productType("Test").build());
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("userId", "testValue");
+		headers.add("userId", "USR1002");
 		HttpEntity<InvoiceDTO> entity = new HttpEntity<>(
 				InvoiceDTO.builder().products(products).currencyCode("AED").build(), headers);
 		InvoiceDTO response = restTemplate.postForObject(
@@ -73,6 +73,23 @@ public class DiscountServiceControllerTest {
 
 		assertNotNull(response);
 		assertNotNull(response.getNetPayableAmount());
+
+	}
+	
+	@Test
+	public void testControllerWithInvalidUser() throws RestClientException, MalformedURLException {
+
+		List<ProductDTO> products = new ArrayList<>();
+		products.add(ProductDTO.builder().price(100.0).productType("Test").build());
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("userId", "Invalid");
+		HttpEntity<InvoiceDTO> entity = new HttpEntity<>(
+				InvoiceDTO.builder().products(products).currencyCode("AED").build(), headers);
+		ErrorResponseDTO errorResponse = restTemplate.postForObject(
+				new URL("http://localhost:" + port + "/applyDiscount").toString(), entity, ErrorResponseDTO.class);
+
+		assertNotNull(errorResponse);
+		assertEquals("400.000.002", errorResponse.getErrorCode());
 
 	}
 

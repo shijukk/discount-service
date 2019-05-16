@@ -1,0 +1,34 @@
+server:
+  port: 9001
+  
+spring:
+  application:
+    name: discount-service
+  cloud:
+    config:
+      enabled: true
+      uri: http://localhost:9002
+      
+  profiles:
+    active: ${SPRING_PROFILE:dev}
+eureka:
+  client:
+    registerWithEureka: true
+    fetch-registry: true
+    service-url:      
+      defaultZone: ${EUREKA_SERVICE_URI:http://localhost:9003/eureka}
+logging:
+  level: 
+    root: INFO
+    com:
+      mycompany: DEBUG
+
+
+
+
+  
+  
+
+  
+
+

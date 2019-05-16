@@ -1,24 +1,21 @@
 package com.mycompany.discount.function;
 
-import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
 
 import org.junit.jupiter.api.Test;
 
-import com.mycompany.discount.config.AffiliateDiscount;
 import com.mycompany.discount.config.CustomerDiscount;
 import com.mycompany.discount.dto.CustomerCategoryDiscount;
 import com.mycompany.discount.dto.UserInfoDTO;
 
 public class GetCustomerDiscountTest {
 
-	Function<UserInfoDTO, Double> getAffiliateDiscount;
+	ToDoubleFunction<UserInfoDTO> getAffiliateDiscount;
 
 	@Test
 	public void testWithAnAffiliateWithDiscount() {
@@ -29,13 +26,12 @@ public class GetCustomerDiscountTest {
 				.build();
 		getAffiliateDiscount = new GetCustomerDiscount(discount);
 
-		Double result = getAffiliateDiscount.apply(UserInfoDTO.builder().activeDuration(21).build());
+		double result = getAffiliateDiscount.applyAsDouble(UserInfoDTO.builder().activeDuration(21).build());
 
-		assertNotNull(result);
-		assertEquals(Double.valueOf(10.0), result);
+		assertEquals(10.0, result);
 
 	}
-	
+
 	@Test
 	public void testWithAnAffiliateWithLessDuration() {
 		List<CustomerCategoryDiscount> customerCategories = new ArrayList<CustomerCategoryDiscount>();
@@ -45,11 +41,11 @@ public class GetCustomerDiscountTest {
 				.build();
 		getAffiliateDiscount = new GetCustomerDiscount(discount);
 
-		Double result = getAffiliateDiscount.apply(UserInfoDTO.builder().activeDuration(19).build());
+		double result = getAffiliateDiscount.applyAsDouble(UserInfoDTO.builder().activeDuration(19).build());
 
-		assertNull(result);
+		assertEquals(0.0, result);
 	}
-	
+
 	@Test
 	public void testWithAnAffiliateWithExactDuration() {
 		List<CustomerCategoryDiscount> customerCategories = new ArrayList<CustomerCategoryDiscount>();
@@ -59,10 +55,9 @@ public class GetCustomerDiscountTest {
 				.build();
 		getAffiliateDiscount = new GetCustomerDiscount(discount);
 
-		Double result = getAffiliateDiscount.apply(UserInfoDTO.builder().activeDuration(20).build());
+		double result = getAffiliateDiscount.applyAsDouble(UserInfoDTO.builder().activeDuration(20).build());
 
-		assertNotNull(result);
-		assertEquals(Double.valueOf(10.0), result);
+		assertEquals(10.0, result);
 	}
 
 	@Test
@@ -70,9 +65,9 @@ public class GetCustomerDiscountTest {
 		CustomerDiscount discount = CustomerDiscount.builder().enabled(false).build();
 		getAffiliateDiscount = new GetCustomerDiscount(discount);
 
-		Double result = getAffiliateDiscount.apply(UserInfoDTO.builder().userType("Affiliate").build());
+		double result = getAffiliateDiscount.applyAsDouble(UserInfoDTO.builder().userType("Affiliate").build());
 
-		assertNull(result);
+		assertEquals(0.0, result);
 
 	}
 

@@ -2,8 +2,6 @@ package com.mycompany.discount.dto;
 
 import java.time.Duration;
 
-import org.apache.commons.lang.time.DurationFormatUtils;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -14,16 +14,15 @@ public class ErrorResponseDTO {
 	 * 
 	 */
 	private String errorCode;
-	
+
 	/**
 	 * 
 	 */
 	private String errorMessage;
-	
+
 	/**
 	 * 
 	 */
 	private List<String> traceMessages = new ArrayList<>();
-	
-	
+
 }

@@ -30,6 +30,6 @@ public class SwaggerConfig {
             .select()
             .apis(RequestHandlerSelectors.any())
             .paths(PathSelectors.ant("/DiscountService/**"))
-            .build();
-    }
+				.build();
+	}
 }

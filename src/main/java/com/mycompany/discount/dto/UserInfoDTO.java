@@ -22,5 +22,5 @@ public class UserInfoDTO {
 	private String userId;
 	private String userType;
 	private int activeDuration;
-	
+
 }

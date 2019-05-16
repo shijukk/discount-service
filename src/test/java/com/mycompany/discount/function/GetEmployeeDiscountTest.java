@@ -1,10 +1,8 @@
 package com.mycompany.discount.function;
 
-import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,29 +12,28 @@ import com.mycompany.discount.dto.UserInfoDTO;
 
 public class GetEmployeeDiscountTest {
 
-	Function<UserInfoDTO, Double> getEmployeeDiscount;
-	
+	ToDoubleFunction<UserInfoDTO> getEmployeeDiscount;
+
 	@Test
 	public void testWithAnAffiliateWithDiscount() {
 		EmployeeDiscount discount = EmployeeDiscount.builder().enabled(true).discountPercentage(10.0).build();
 		getEmployeeDiscount = new GetEmployeeDiscount(discount);
-		
-		Double result = getEmployeeDiscount.apply(UserInfoDTO.builder().userType("Employee").build());
-		
-		assertNotNull(result);
-		assertEquals(Double.valueOf(10.0), result);
-		
+
+		double result = getEmployeeDiscount.applyAsDouble(UserInfoDTO.builder().userType("Employee").build());
+
+		assertEquals(10.0, result);
+
 	}
-	
+
 	@Test
 	public void testWithAnAffiliateWitDiscountDisabled() {
 		AffiliateDiscount discount = AffiliateDiscount.builder().enabled(false).discountPercentage(10.0).build();
 		getEmployeeDiscount = new GetAffiliateDiscount(discount);
-		
-		Double result = getEmployeeDiscount.apply(UserInfoDTO.builder().userType("Employee").build());
-		
-		assertNull(result);
-		
+
+		double result = getEmployeeDiscount.applyAsDouble(UserInfoDTO.builder().userType("Employee").build());
+
+		assertEquals(0, result);
+
 	}
-	
+
 }

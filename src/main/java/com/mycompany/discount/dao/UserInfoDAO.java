@@ -11,11 +11,11 @@ import com.mycompany.discount.dto.UserInfoDTO;
  */
 @Repository
 public interface UserInfoDAO {
-	
+
 	/**
 	 * 
 	 * @param userId
 	 * @return
 	 */
-	 UserInfoDTO getUserInfo(String userId);
+	UserInfoDTO getUserInfo(String userId);
 }

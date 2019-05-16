@@ -1,12 +1,20 @@
 package com.mycompany.discount.function;
 
-import java.util.function.BiFunction;
-import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
+import javax.validation.constraints.NotNull;
+
+import com.mycompany.discount.config.InvoiceLevelDiscount;
 import com.mycompany.discount.dto.InvoiceDTO;
 import com.mycompany.discount.dto.ProductDTO;
 
-public class CalculateInvoiceTotal implements Function<InvoiceDTO, InvoiceDTO> {
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+public class CalculateInvoiceTotal implements UnaryOperator<InvoiceDTO> {
+
+	@NotNull
+	private InvoiceLevelDiscount invoiceLevelDiscount;
 
 	@Override
 	public InvoiceDTO apply(final InvoiceDTO invoice) {
@@ -17,18 +25,16 @@ public class CalculateInvoiceTotal implements Function<InvoiceDTO, InvoiceDTO> {
 			totalProductDiscount = totalProductDiscount + product.getDiscount();
 		}
 		Double totalPayable = totalPrice - totalProductDiscount;
-		int flatDiscountApplicableCount = Double.valueOf(totalPayable / 100).intValue();
-		Double additionalDiscount = flatDiscountApplicableCount * 5.0;
-		
-		return InvoiceDTO.builder()
-				.products(invoice.getProducts())
-				.netPayableAmount(totalPayable - additionalDiscount)
-				.currencyCode(invoice.getCurrencyCode())
-				.additionalDiscount(additionalDiscount)
-				.totalDiscount(totalProductDiscount + additionalDiscount)
-				.totalProductDiscount(totalProductDiscount)
-				.totalPrice(totalPrice)
-				.build();
+		Double additionalDiscount = 0.0;
+		int flatDiscountApplicableCount = 0;
+		if (null != invoiceLevelDiscount.getDiscountApplyForEach() && null != invoiceLevelDiscount.getFlatDiscount()) {
+			flatDiscountApplicableCount = (int) (totalPayable / invoiceLevelDiscount.getDiscountApplyForEach());
+			additionalDiscount = flatDiscountApplicableCount * invoiceLevelDiscount.getFlatDiscount();
+		}
+		return InvoiceDTO.builder().products(invoice.getProducts()).netPayableAmount(totalPayable - additionalDiscount)
+				.currencyCode(invoice.getCurrencyCode()).additionalDiscount(additionalDiscount)
+				.totalDiscount(totalProductDiscount + additionalDiscount).totalProductDiscount(totalProductDiscount)
+				.totalPrice(totalPrice).build();
 	}
 
 }

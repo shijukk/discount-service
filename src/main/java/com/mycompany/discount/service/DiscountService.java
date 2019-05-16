@@ -8,12 +8,12 @@ import com.mycompany.discount.dto.InvoiceDTO;
  *
  */
 public interface DiscountService {
-	
+
 	/**
 	 * 
 	 * @param invoice
 	 * @param userId
 	 * @return
 	 */
-	InvoiceDTO applyDiscount(InvoiceDTO invoice, String userId); 
+	InvoiceDTO applyDiscount(InvoiceDTO invoice, String userId);
 }

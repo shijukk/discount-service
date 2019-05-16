@@ -1,28 +1,26 @@
 package com.mycompany.discount.function;
 
-import java.util.function.Function;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.function.ToDoubleFunction;
 
 import com.mycompany.discount.config.EmployeeDiscount;
 import com.mycompany.discount.dto.UserInfoDTO;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @AllArgsConstructor
-@NoArgsConstructor
-public class GetEmployeeDiscount implements Function<UserInfoDTO, Double> {
+public class GetEmployeeDiscount implements ToDoubleFunction<UserInfoDTO> {
 
-	@Autowired
-	private EmployeeDiscount employeeDiscount = new EmployeeDiscount();
+	private EmployeeDiscount employeeDiscount;
 
 	@Override
-	public Double apply(final UserInfoDTO user) {
+	public double applyAsDouble(final UserInfoDTO user) {
+		log.info("Applying employeeDiscount configured : {}", employeeDiscount.toString());
 		if (employeeDiscount.isEnabled()) {
 			return employeeDiscount.getDiscountPercentage();
 		}
-		return null;
+		return 0.0;
 	}
 
 }

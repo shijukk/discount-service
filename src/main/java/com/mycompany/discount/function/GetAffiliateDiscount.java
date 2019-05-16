@@ -1,27 +1,26 @@
 package com.mycompany.discount.function;
 
-import java.util.function.Function;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.function.ToDoubleFunction;
 
 import com.mycompany.discount.config.AffiliateDiscount;
 import com.mycompany.discount.dto.UserInfoDTO;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @AllArgsConstructor
-@NoArgsConstructor
-public class GetAffiliateDiscount implements Function<UserInfoDTO, Double> {
+public class GetAffiliateDiscount implements ToDoubleFunction<UserInfoDTO> {
 
-	private AffiliateDiscount affiliateDiscount= new AffiliateDiscount();
+	private AffiliateDiscount affiliateDiscount;
 
 	@Override
-	public Double apply(final UserInfoDTO user) {
+	public double applyAsDouble(UserInfoDTO arg0) {
+		log.info("Applying affiliateDiscount configured : {}", affiliateDiscount.toString());
 		if (affiliateDiscount.isEnabled()) {
 			return affiliateDiscount.getDiscountPercentage();
 		}
-		return null;
+		return 0.0;
 	}
 
 }

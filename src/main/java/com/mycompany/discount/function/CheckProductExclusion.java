@@ -7,24 +7,23 @@ import com.mycompany.discount.dto.ProductDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Slf4j
 public class CheckProductExclusion implements Predicate<ProductDTO> {
-	
-	private DiscountExclusion exclusion = new DiscountExclusion();
+
+	private DiscountExclusion exclusion;
 
 	@Override
 	public boolean test(final ProductDTO product) {
-		if(exclusion.isEnabled()) {
-			 return exclusion.getProductTypes().stream()
-			.filter( type ->   product.getProductType().equalsIgnoreCase(type))
-			.findFirst()
-			.map((category) -> {return true;})
-			.orElse(false); 
+		log.debug("Product exclusion check for '{}' of type '{}' ", product.getProductName(), product.getProductType());
+		if (exclusion.isEnabled()) {
+			return exclusion.getProductTypes().stream().filter(type -> product.getProductType().equalsIgnoreCase(type))
+					.findFirst().map(category -> true).orElse(false);
 		}
 		return false;
 	}
 
-	
 }

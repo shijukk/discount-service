@@ -1,34 +1,31 @@
 package com.mycompany.discount.function;
 
 import java.time.Duration;
-import java.util.function.Function;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.function.ToDoubleFunction;
 
 import com.mycompany.discount.config.CustomerDiscount;
+import com.mycompany.discount.dto.CustomerCategoryDiscount;
 import com.mycompany.discount.dto.UserInfoDTO;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
-@NoArgsConstructor
+@Slf4j
 @AllArgsConstructor
-public class GetCustomerDiscount implements Function<UserInfoDTO, Double> {
-	
-	@Autowired
-	private CustomerDiscount customerDiscount = new CustomerDiscount();
+public class GetCustomerDiscount implements ToDoubleFunction<UserInfoDTO> {
+
+	private CustomerDiscount customerDiscount;
 
 	@Override
-	public Double apply(final UserInfoDTO user) {
+	public double applyAsDouble(final UserInfoDTO user) {
+		log.info("customerDiscount configured : {}", customerDiscount.toString());
 		final Duration activeDuration = Duration.ofDays(0).plusDays(user.getActiveDuration());
-		if(customerDiscount.isEnabled()) {
-			 return customerDiscount.getCustomerCategories().stream()
-			.filter( category ->   activeDuration.compareTo(category.getActiveDuration()) >= 0)
-			.findFirst()
-			.map((category) -> {return category.getDiscountPercentage();})
-			.orElse(null); 
+		if (customerDiscount.isEnabled()) {
+			return customerDiscount.getCustomerCategories().stream()
+					.filter(category -> activeDuration.compareTo(category.getActiveDuration()) >= 0).findFirst()
+					.map(CustomerCategoryDiscount::getDiscountPercentage).orElse(0.0);
 		}
-		return null;
+		return 0.0;
 	}
 
 }

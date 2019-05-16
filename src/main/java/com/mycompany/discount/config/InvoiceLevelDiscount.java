@@ -19,8 +19,9 @@ import lombok.ToString;
 @Builder
 @Configuration
 @RefreshScope
-@ConfigurationProperties(prefix = "employee")
-public class EmployeeDiscount {
-	private boolean enabled;
-	private Double discountPercentage;
+@ConfigurationProperties(prefix = "invoice")
+public class InvoiceLevelDiscount {
+	private Double flatDiscount;
+
+	private Double discountApplyForEach;
 }

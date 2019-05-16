@@ -1,6 +1,5 @@
 package com.mycompany.discount.dto;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -25,51 +24,45 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class InvoiceDTO implements Serializable{
+public class InvoiceDTO {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * 
-	 */
-	@NotNull @NotEmpty @Valid
+	@NotNull
+	@NotEmpty
+	@Valid
 	private List<ProductDTO> products;
-	
+
 	/**
 	 * 
 	 */
 	private Double totalPrice;
-	
+
 	/**
 	 * 
 	 */
 	private Double totalProductDiscount;
-	
+
 	/**
 	 * 
 	 */
 	private Double additionalDiscount;
-	
+
 	/**
 	 * 
 	 */
 	private Double totalDiscount;
-	
+
 	/**
 	 * 
 	 */
 	private Double netPayableAmount;
-	
+
 	/**
 	 * 
 	 */
-	@NotNull 
+	@NotNull
 	private String currencyCode;
 
-	
-	
-	
 }
