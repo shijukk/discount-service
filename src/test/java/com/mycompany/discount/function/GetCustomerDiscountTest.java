@@ -2,7 +2,6 @@ package com.mycompany.discount.function;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.ToDoubleFunction;
@@ -20,8 +19,8 @@ public class GetCustomerDiscountTest {
 	@Test
 	public void testWithAnAffiliateWithDiscount() {
 		List<CustomerCategoryDiscount> customerCategories = new ArrayList<CustomerCategoryDiscount>();
-		customerCategories.add(CustomerCategoryDiscount.builder().activeDuration(Duration.ofDays(20))
-				.discountPercentage(10.0).build());
+		customerCategories
+				.add(CustomerCategoryDiscount.builder().activeDurationDays(20).discountPercentage(10.0).build());
 		CustomerDiscount discount = CustomerDiscount.builder().enabled(true).customerCategories(customerCategories)
 				.build();
 		getAffiliateDiscount = new GetCustomerDiscount(discount);
@@ -35,8 +34,8 @@ public class GetCustomerDiscountTest {
 	@Test
 	public void testWithAnAffiliateWithLessDuration() {
 		List<CustomerCategoryDiscount> customerCategories = new ArrayList<CustomerCategoryDiscount>();
-		customerCategories.add(CustomerCategoryDiscount.builder().activeDuration(Duration.ofDays(20))
-				.discountPercentage(10.0).build());
+		customerCategories
+				.add(CustomerCategoryDiscount.builder().activeDurationDays(20).discountPercentage(10.0).build());
 		CustomerDiscount discount = CustomerDiscount.builder().enabled(true).customerCategories(customerCategories)
 				.build();
 		getAffiliateDiscount = new GetCustomerDiscount(discount);
@@ -49,8 +48,8 @@ public class GetCustomerDiscountTest {
 	@Test
 	public void testWithAnAffiliateWithExactDuration() {
 		List<CustomerCategoryDiscount> customerCategories = new ArrayList<CustomerCategoryDiscount>();
-		customerCategories.add(CustomerCategoryDiscount.builder().activeDuration(Duration.ofDays(20))
-				.discountPercentage(10.0).build());
+		customerCategories
+				.add(CustomerCategoryDiscount.builder().activeDurationDays(20).discountPercentage(10.0).build());
 		CustomerDiscount discount = CustomerDiscount.builder().enabled(true).customerCategories(customerCategories)
 				.build();
 		getAffiliateDiscount = new GetCustomerDiscount(discount);

@@ -15,7 +15,7 @@ import lombok.Setter;
 @Builder
 public class CustomerCategoryDiscount {
 
-	private Duration activeDuration = Duration.ofDays(30);
+	private long activeDurationDays ;
 	private Double discountPercentage = 10.0;
 	private boolean enabled = true;
 }

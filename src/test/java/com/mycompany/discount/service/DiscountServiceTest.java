@@ -87,8 +87,8 @@ public class DiscountServiceTest {
 	@BeforeEach
 	public void init() {
 		List<CustomerCategoryDiscount> customerCategories = new ArrayList<CustomerCategoryDiscount>();
-		customerCategories.add(CustomerCategoryDiscount.builder().activeDuration(Duration.ofDays(20))
-				.discountPercentage(10.0).build());
+		customerCategories
+				.add(CustomerCategoryDiscount.builder().activeDurationDays(20).discountPercentage(10.0).build());
 		CustomerDiscount discount = CustomerDiscount.builder().enabled(true).customerCategories(customerCategories)
 				.build();
 		EmployeeDiscount empDiscount = EmployeeDiscount.builder().enabled(true).discountPercentage(5.0).build();
@@ -100,8 +100,8 @@ public class DiscountServiceTest {
 				.build();
 		InvoiceLevelDiscount invoiceLevelDiscount = InvoiceLevelDiscount.builder().discountApplyForEach(100.0)
 				.flatDiscount(5.0).build();
-		lenient().when(userInfoDAOImpl.getUserInfo(eq("Customer1")))
-				.thenReturn(UserInfoDTO.builder().userId("Customer1").userType("Customer").activeDurationDays(60).build());
+		lenient().when(userInfoDAOImpl.getUserInfo(eq("Customer1"))).thenReturn(
+				UserInfoDTO.builder().userId("Customer1").userType("Customer").activeDurationDays(60).build());
 		lenient().when(userInfoDAOImpl.getUserInfo(eq("Employee1")))
 				.thenReturn(UserInfoDTO.builder().userId("Employee1").userType("Employee").build());
 		lenient().when(userInfoDAOImpl.getUserInfo(eq("Affiliate1")))
@@ -114,9 +114,9 @@ public class DiscountServiceTest {
 
 	@Test
 	public void testApplyCustomerDiscount() {
-		
-		InvoiceDTO invoiceDTO  = service.applyDiscount(getInvoiceDTO(), "Customer1");
-		
+
+		InvoiceDTO invoiceDTO = service.applyDiscount(getInvoiceDTO(), "Customer1");
+
 		assertNotNull(invoiceDTO);
 		assertNotNull(invoiceDTO.getProducts());
 		assertNotNull(invoiceDTO.getProducts().get(0));
